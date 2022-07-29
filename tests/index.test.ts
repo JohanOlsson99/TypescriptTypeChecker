@@ -1,5 +1,5 @@
 'use strict'
-import { Checker, Types } from '../src/index';
+import { Checker, Types } from '../src/Checker';
  
 describe('testing index file', () => {
   test('empty string should result in zero', () => {
@@ -172,33 +172,4 @@ describe('testing index file', () => {
       expect(e.message).toBe('Custom Error');
     }
   });
-
-  /*
-  console.log('1');
-console.log(new Checker().checkVariableType("2", Types.STRING));
-console.log('2');
-console.log(new Checker().checkVariableType(1, Types.NUMBER));
-console.log('3');
-console.log(new Checker().checkVariableType(true, Types.BOOLEAN));
-console.log('4');
-console.log(new Checker().checkVariableType({}, Types.OBJECT));
-console.log('5');
-console.log(new Checker().checkVariableType([1], Types.ARRAY));
-console.log('6');
-console.log(new Checker().checkVariableType(function () { }, Types.FUNCTION));
-console.log('7');
-console.log(new Checker().checkVariableType(undefined, Types.UNDEFINED));
-console.log('8');
-console.log(new Checker().checkVariableType(null, Types.NULL));
-console.log('9');
-console.log(new Checker().checkVariableType(Symbol(), Types.SYMBOL));
-console.log('10');
-console.log(new Checker().checkVariableType(/a/, Types.REGEXP));
-console.log('11');
-console.log(new Checker().checkVariableType(new Date(), Types.DATE));
-console.log('12');
-console.log(new Checker().checkVariableType(new Error(), Types.ERROR));
-console.log('13');
-console.log(new Checker().checkVariableType(JSON.stringify({a: 1}), Types.JSON));
-  */
 });
