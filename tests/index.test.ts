@@ -1,5 +1,5 @@
 'use strict'
-import { Checker, Types } from '../src/Checker';
+import { Checker, Types } from '../src/checker';
  
 describe('Testing checkVariableType', () => {
   test('empty string should result in zero', () => {

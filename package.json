@@ -2,10 +2,14 @@
   "name": "type-checker-ts",
   "version": "1.1.1",
   "description": "A checker for types in typescript",
-  "main": "bin/index.js",
+  "main": "dist/checker.js",
   "scripts": {
-    "start": "npx tsc && node bin/index.js",
+    "start": "npx tsc && node dist/checker.js",
     "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JohanOlsson99/TypescriptTypeChecker.git"
   },
   "author": "Johan Olsson",
   "license": "ISC",
