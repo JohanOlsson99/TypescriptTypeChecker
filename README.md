@@ -7,9 +7,13 @@ const checker = new Checker();
 checker.checkVariableType(variable: any, type: Types, error?: Error);
 ```
 Where Types is a type from the enum Types, and error which is an optional error message if the type check fails.
-
-Example:
+To import the checker, you can use the following:
 ```
+import { Checker, Types } from 'type-checker-ts';
+```
+To run the code you can use the following example:
+```
+
 const checker = new Checker();
 console.log(checker.checkVariableType('hello world', Types.STRING));
 console.log(checker.checkVariableType('hello world', Types.STRING, new Error('Is not a string')));
