@@ -60,24 +60,63 @@ class Checker {
     public checkNumber(
             variable: any, error?: Error,
             requirements?: NumberRequirements, radix: number = 10): boolean {
-        let num = 0;
-        let numHasChanged = false;
+        let num: number = NaN;
+        let numHasChanged: Boolean = false;
         let isInt = this.checkVariableType(variable, Types.NUMBER);
         if (isInt) {
-            num = variable as number;
+            num = parseInt((variable as number).toString(), radix);
             numHasChanged = true;
         }
         if (!numHasChanged) {
             let isString = this.checkVariableType(variable, Types.STRING);
             if (isString) {
-                if (!radix) {
-                    radix = 10;
-                }
                 num = parseInt(variable as string, radix);
                 numHasChanged = true;
             }
         }
-        if (!numHasChanged && error) {
+        if ((num === NaN || !numHasChanged) && error) {
+            throw error;
+        } else if (!numHasChanged) {
+            return false;
+        }
+        let passRequirements = this.checkRequirements(num, requirements);
+        if (passRequirements) {
+            return true;
+        } else {
+            if (error) {
+                throw error;
+            }
+            return false;
+        }
+    }
+
+    /**
+     * Will check the variable type, if the type is number we will check for requirements
+     * and then return. If the variable type is string we try to parse it to a float with
+     * specified radix. If the parse is successful we check for requirements and return true.
+     * @param variable The variable to check
+     * @param error The error to throw if the check fails
+     * @param requirements The requirements to check for
+     * @returns boolean
+     */
+    public checkFloat(
+            variable: any, error?: Error,
+            requirements?: NumberRequirements): boolean {
+        let num: number = NaN;
+        let numHasChanged: Boolean = false;
+        let isInt = this.checkVariableType(variable, Types.NUMBER);
+        if (isInt) {
+            num = parseFloat((variable as number).toString());
+            numHasChanged = true;
+        }
+        if (!numHasChanged) {
+            let isString = this.checkVariableType(variable, Types.STRING);
+            if (isString) {
+                num = parseFloat(variable as string);
+                numHasChanged = true;
+            }
+        }
+        if ((num === NaN || !numHasChanged) && error) {
             throw error;
         } else if (!numHasChanged) {
             return false;
