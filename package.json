@@ -13,7 +13,17 @@
     "url": "https://github.com/JohanOlsson99/TypescriptTypeChecker.git"
   },
   "author": "Johan Olsson",
-  "license": "ISC",
+  "license": "MIT",
+  "keywords": [
+    "type-checker-ts",
+    "typescript checker",
+    "typescriptChecker",
+    "type-checker",
+    "type-checker-typescript",
+    "type checker ts",
+    "type checker typescript",
+    "checker-typescript"
+  ],
   "devDependencies": {
     "@types/jest": "^28.1.6",
     "jest": "^28.1.3",
