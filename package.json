@@ -1,7 +1,7 @@
 {
-  "name": "checker",
-  "version": "1.0.0",
-  "description": "",
+  "name": "type-checker-ts",
+  "version": "1.1.0",
+  "description": "A checker for types in typescript",
   "main": "bin/index.js",
   "scripts": {
     "start": "npx tsc && node bin/index.js",
