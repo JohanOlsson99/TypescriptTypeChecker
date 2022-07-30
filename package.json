@@ -3,6 +3,7 @@
   "version": "1.1.2",
   "description": "A checker for types in typescript",
   "main": "dist/checker.js",
+  "types": "dist/checker.js",
   "scripts": {
     "start": "npx tsc && node dist/checker.js",
     "test": "jest"
