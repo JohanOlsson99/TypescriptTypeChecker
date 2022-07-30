@@ -1,7 +1,7 @@
 'use strict'
 import { Checker, Types } from '../src/Checker';
  
-describe('testing index file', () => {
+describe('Testing checkVariableType', () => {
   test('empty string should result in zero', () => {
     expect(0).toBe(0);
   });
@@ -171,5 +171,38 @@ describe('testing index file', () => {
     } catch (e: any) {
       expect(e.message).toBe('Custom Error');
     }
+  });
+
+  describe('Testing checkNumber', () => {
+    test('checkNumber should be number', () => {
+      const checker = new Checker();
+      expect(checker.checkNumber(1)).toBe(true);
+      expect(checker.checkNumber(1, new Error('Custom Error'))).toBe(true);
+      expect(checker.checkNumber('10', new Error('Custom Error'))).toBe(true);
+      expect(checker.checkNumber(true)).toBe(false);
+      expect(checker.checkNumber({})).toBe(false);
+      expect(checker.checkNumber([])).toBe(false);
+      try {
+        checker.checkNumber(true, new Error('Custom Error'));
+        throw new Error('Did not pass');
+      } catch (e: any) {
+        expect(e.message).toBe('Custom Error');
+      }
+    });
+    test('checkNumber with parameters', () => {
+      const checker = new Checker();
+      expect(checker.checkNumber(10, undefined, { min: 10, max: 20 })).toBe(true);
+      expect(checker.checkNumber(10, undefined, { min: 11, max: 20 })).toBe(false);
+      expect(checker.checkNumber(10, undefined, { min: 5, max: 10 })).toBe(true);
+      expect(checker.checkNumber(10, undefined, { min: 5, max: 9 })).toBe(false);
+      expect(checker.checkNumber(10, undefined, { equalTo: [1, 4, 8, 9, 11] })).toBe(false);
+      expect(checker.checkNumber(10, undefined, { equalTo: [1, 4, 8, 10, 11] })).toBe(true);
+      expect(checker.checkNumber(10, undefined, { notEqualTo: [1, 4, 8, 10, 11] })).toBe(false);
+      expect(checker.checkNumber(10, undefined, { notEqualTo: [1, 4, 8, 9, 11] })).toBe(true);
+      expect(checker.checkNumber(10, undefined, { equalTo: [10], notEqualTo: [9, 10, 11] })).toBe(false);
+      expect(checker.checkNumber(10, undefined, { equalTo: [10], notEqualTo: [9, 11], min: 11 })).toBe(false);
+      expect(checker.checkNumber(10, undefined, { equalTo: [10], notEqualTo: [9, 11], min: 6, max: 9 })).toBe(false);
+      expect(checker.checkNumber(10, undefined, { equalTo: [10], notEqualTo: [9, 11], min: 6, max: 12 })).toBe(true);
+    })
   });
 });
